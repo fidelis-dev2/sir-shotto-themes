@@ -1,0 +1,72 @@
+[
+  {
+    "id": "ocean-dark",
+    "name": "Ocean Dark",
+    "category": "Ocean",
+    "description": "Deep ocean waves and turquoise coastal light.",
+    "wallpaper": "ocean-dark.png"
+  },
+  {
+    "id": "midnight-tide",
+    "name": "Midnight Tide",
+    "category": "Ocean",
+    "description": "A quiet moonlit ocean beneath a violet night sky.",
+    "wallpaper": "midnight-tide.png"
+  },
+  {
+    "id": "aurora-coast",
+    "name": "Aurora Coast",
+    "category": "Nature",
+    "description": "Emerald aurora lights above a dramatic arctic coast.",
+    "wallpaper": "aurora-coast.png"
+  },
+  {
+    "id": "cosmic-bloom",
+    "name": "Cosmic Bloom",
+    "category": "Space",
+    "description": "A vivid violet nebula blooming across deep space.",
+    "wallpaper": "cosmic-bloom.png"
+  },
+  {
+    "id": "sakura-mist",
+    "name": "Sakura Mist",
+    "category": "Nature",
+    "description": "Soft cherry blossoms floating above a tranquil pink lake.",
+    "wallpaper": "sakura-mist.png"
+  },
+  {
+    "id": "solar-dunes",
+    "name": "Solar Dunes",
+    "category": "Nature",
+    "description": "Golden sunlight sweeping across endless desert dunes.",
+    "wallpaper": "solar-dunes.png"
+  },
+  {
+    "id": "obsidian-flow",
+    "name": "Obsidian Flow",
+    "category": "Abstract",
+    "description": "Sculptural black metallic curves with a premium finish.",
+    "wallpaper": "obsidian-flow.png"
+  },
+  {
+    "id": "emerald-sanctuary",
+    "name": "Emerald Sanctuary",
+    "category": "Nature",
+    "description": "A lush rainforest waterfall surrounded by deep green foliage.",
+    "wallpaper": "emerald-sanctuary.png"
+  },
+  {
+    "id": "neon-grid",
+    "name": "Neon Grid",
+    "category": "City",
+    "description": "A futuristic city glowing with cyan and magenta neon.",
+    "wallpaper": "neon-grid.png"
+  },
+  {
+    "id": "lunar-silver",
+    "name": "Lunar Silver",
+    "category": "Abstract",
+    "description": "Elegant silver-white flowing forms and soft minimal light.",
+    "wallpaper": "lunar-silver.png"
+  }
+]
