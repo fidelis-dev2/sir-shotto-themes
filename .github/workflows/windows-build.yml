@@ -1,0 +1,63 @@
+
+name: Sir Shotto Themes - Windows Installer
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows-build:
+    name: Build Windows Application
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri -> target
+
+      - name: Install Tauri CLI
+        run: cargo install tauri-cli --version "^2" --locked
+
+      - name: Verify project files
+        shell: pwsh
+        run: |
+          $RequiredFiles = @(
+            "src-tauri/tauri.conf.json",
+            "src-tauri/Cargo.toml",
+            "scripts/build-windows.ps1",
+            "index.html",
+            "themes/packs.tsv"
+          )
+
+          foreach ($File in $RequiredFiles) {
+            if (-not (Test-Path $File)) {
+              throw "Required project file missing: $File"
+            }
+
+            Write-Host "Verified: $File"
+          }
+
+      - name: Build Sir Shotto Themes
+        shell: pwsh
+        run: cargo tauri build
+
+      - name: Upload Windows installers
+        uses: actions/upload-artifact@v4
+        with:
+          name: Sir-Shotto-Themes-Windows-Installer
+          path: src-tauri/target/release/bundle/
+          if-no-files-found: error
+          retention-days: 14
