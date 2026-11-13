@@ -1,117 +1,273 @@
+
 # Sir Shotto Themes Engine
 
 **One desktop application. Two kinds of desktop experiences.**
 
-Sir Shotto Themes combines:
+Sir Shotto Themes is a Windows-first desktop theme application that combines traditional wallpaper slideshows with interactive desktop experiences.
 
-1. **Wallpaper Slideshows** — rotate a collection of local wallpapers at a selected interval.
-2. **Interactive Themes** — local HTML, CSS and JavaScript experiences with animations and optional Sir Shotto widgets.
+## 1. Main Features
 
-The current implementation milestone targets **Windows 10/11** for interactive desktop rendering. Linux and macOS slideshow adapters remain in the source, but interactive rendering is not yet implemented for those platforms.
+### Wallpaper Slideshows
 
-## What is included
+- Rotate collections of local wallpapers.
+- Select different wallpaper collections.
+- Configure slideshow intervals.
+- Import existing picture ZIP files.
+- Apply wallpaper collections through Windows integration.
 
-- Original 10 Sir Shotto wallpaper collections and theme artwork.
-- Slideshow groups: Sir Shotto Collection, Ocean, Nature, Night Lights and Abstract.
-- Slideshow intervals: 1, 5, 15, 30 and 60 minutes.
-- Interactive theme gallery for the 10 bundled themes.
-- Sandboxed HTML theme preview.
-- Windows desktop renderer intended to sit behind desktop icons.
-- Optional clock/date/brand widget overlay.
-- System Tray menu: reopen the gallery, hide the desktop experience, or quit.
-- Close button hides the main gallery to the tray; it does not terminate the desktop renderer.
-- Import of existing picture ZIPs for slideshow use.
+### Interactive Desktop Themes
 
-## Build the Windows desktop application without Node.js
+- Browse the bundled interactive themes.
+- Preview HTML, CSS and JavaScript themes.
+- Apply interactive themes through the desktop application.
+- Optional clock, date and brand widgets.
+- Desktop rendering intended to operate behind Windows desktop icons.
 
-The Windows desktop build does **not** require Node.js or npm. The project includes a PowerShell frontend-preparation script and uses the Rust-based Tauri CLI.
+### Desktop Application
 
-Requirements for the developer computer:
+- Single desktop application.
+- System Tray integration.
+- Close button hides the gallery instead of terminating the application.
+- Reopen the gallery from the System Tray.
+- Hide the desktop experience or quit through the tray menu.
 
-- Windows 10 or Windows 11 (64-bit).
-- Rust stable toolchain and Cargo.
-- Visual Studio C++ Build Tools with the x64 MSVC compiler and Windows 10/11 SDK.
-- WebView2 Runtime (normally present on supported Windows 10/11 systems).
+## 2. Supported Platforms
 
-Open **x64 Native Tools Command Prompt for VS** and run these commands from the project folder:
+| Platform | Slideshow | Interactive Desktop |
+|---|---|---|
+| Windows 10/11 | Implementation available; requires testing | Initial implementation; requires testing |
+| Linux | Existing adapter retained | Not implemented |
+| macOS | Existing adapter retained | Not implemented |
 
-```powershell
+Windows 10/11 is the primary development target.
+
+## 3. Project Structure
+
+```text
+sir-shotto-themes-engine/
+│
+├── .github/
+│   └── workflows/
+│
+├── docs/
+│   └── THEME-PACKAGE-FORMAT.md
+│
+├── downloads/
+├── themes/
+├── src/
+├── site/
+├── scripts/
+│   ├── build-windows.ps1
+│   ├── build.mjs
+│   └── packs.mjs
+│
+├── src-tauri/
+│   ├── icons/
+│   ├── src/
+│   ├── Cargo.toml
+│   ├── Cargo.lock
+│   ├── build.rs
+│   └── tauri.conf.json
+│
+├── index.html
+├── desktop-renderer.html
+├── desktop-renderer.css
+├── desktop-renderer.js
+├── GITHUB-PAGES.md
+├── README.md
+└── .gitignore
+```
+
+The structure above describes the main project components. Additional source files and theme assets are retained in their respective directories.
+
+## 4. Windows Development Requirements
+
+Developers building the native Windows application need:
+
+- Windows 10 or Windows 11, 64-bit.
+- Rust stable toolchain.
+- Cargo.
+- Visual Studio C++ Build Tools.
+- x64 MSVC compiler and linker.
+- Windows SDK.
+- WebView2 Runtime.
+
+The Windows desktop build uses Rust, Tauri and PowerShell.
+
+**Node.js is not required for the native Windows build.**
+
+## 5. Build the Windows Application
+
+Open an x64 Native Tools Command Prompt for Visual Studio.
+
+Navigate to the project root:
+
+```cmd
+cd /d "PATH\TO\sir-shotto-themes-engine"
+```
+
+Install the Tauri CLI:
+
+```cmd
 cargo install tauri-cli --version "^2" --locked
+```
+
+Prepare the frontend:
+
+```cmd
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\scripts\build-windows.ps1"
+```
+
+Build the application:
+
+```cmd
 cargo tauri build
 ```
 
-The Tauri build runs `scripts/build-windows.ps1` automatically to prepare the static frontend. No Node.js installation is needed for this Windows desktop build.
+The Tauri build automatically runs the frontend preparation command configured in `src-tauri/tauri.conf.json`.
 
-The distributable installers are created under `src-tauri/target/release/bundle/` (for example, the `nsis` and `msi` folders, depending on the configured bundle targets).
+Generated Windows installers are expected under:
 
-## Optional browser gallery development
+```text
+src-tauri/target/release/bundle/
+```
 
-Node.js 18+ is only needed if you want to run the separate browser-based development server using `npm start`. It is **not** required to build or run the installed Windows desktop application.
+Depending on the configured bundle targets, installer formats can include MSI and NSIS installers.
 
-## Use interactive themes
+## 6. Interactive Themes
+
+To apply an interactive theme:
 
 1. Open Sir Shotto Themes.
-2. Select **Interactive themes**.
-3. Preview a theme.
-4. Choose whether to show the clock/date widgets.
-5. Click **Apply desktop**.
-6. The renderer is intended to remain behind desktop icons.
-7. Close the main gallery: it hides to the System Tray, leaving the desktop experience running.
-8. Use the tray menu to reopen the gallery, hide the desktop experience, or quit Sir Shotto.
+2. Navigate to Interactive Themes.
+3. Select a theme.
+4. Preview the theme.
+5. Configure the optional clock and date widgets.
+6. Select Apply Desktop.
+7. Wait for the native application to confirm the operation.
 
-The widgets are a separate overlay and can be switched on or off from the Interactive themes page or Settings.
+The desktop renderer is designed to remain behind Windows desktop icons.
 
-## Use slideshow themes
+Closing the main gallery hides it in the System Tray. It does not intentionally terminate the desktop experience.
 
-1. Select a theme group.
-2. Click Apply.
-3. Choose the interval.
-4. Confirm the Windows action.
+The interactive desktop implementation requires testing on actual supported Windows systems.
 
-Windows slideshow handling now builds a Shell Item Array from the individual image files rather than passing the folder as a single item.
+## 7. Wallpaper Slideshow Themes
 
-## Theme package format
+To apply a slideshow:
 
-See [docs/THEME-PACKAGE-FORMAT.md](docs/THEME-PACKAGE-FORMAT.md).
+1. Open the application.
+2. Select a wallpaper collection.
+3. Choose the desired slideshow interval.
+4. Select Apply.
+5. Confirm the Windows action if prompted.
+
+Available intervals include:
+
+- 1 minute
+- 5 minutes
+- 15 minutes
+- 30 minutes
+- 60 minutes
+
+Windows slideshow handling uses individual image files to construct the Shell Item Array.
+
+## 8. Theme Package Format
+
+See:
+
+[docs/THEME-PACKAGE-FORMAT.md](docs/THEME-PACKAGE-FORMAT.md)
 
 Interactive theme packages use:
 
-- `manifest.json`
-- `index.html`
-- `styles.css`
-- `script.js`
-- local assets and preview artwork
+```text
+theme-name/
+├── manifest.json
+├── index.html
+├── styles.css
+├── script.js
+└── assets/
+```
 
-Bundled interactive themes are available in this Windows-first milestone. The browser ZIP importer still primarily supports adding wallpaper pictures to slideshow collections. Native installation and execution of arbitrary imported HTML theme packages is a separate security-hardening task and is not claimed as complete.
+The bundled interactive themes are included in the Windows-first implementation.
 
-## Important implementation status
+The browser ZIP importer primarily supports adding wallpaper pictures to slideshow collections.
 
-- Windows slideshow: implementation updated; validate on actual Windows 10/11 machines.
-- Windows interactive renderer: first implementation added using a Tauri WebView and Windows WorkerW desktop host; requires real Windows runtime testing.
-- System Tray and hide-on-close: implemented in the Tauri application source; requires Windows runtime testing.
-- Interactive widget toggle: implemented in the desktop renderer.
-- Linux/macOS interactive desktop rendering: not implemented yet.
-- Linux/macOS slideshow support: retained from the original project, but not newly regression-tested in this milestone.
-- Imported third-party interactive themes: not yet enabled for native desktop execution.
+Native installation and execution of arbitrary imported HTML theme packages is a separate security-hardening task.
 
-## Safety
+## 9. GitHub Pages
 
-Interactive themes are untrusted web content. The desktop renderer loads theme HTML inside a sandboxed iframe and the renderer page does not expose Tauri APIs to that iframe. Keep packages offline and local. Do not add filesystem, shell or privileged bridge access to theme JavaScript.
+See:
 
+[GITHUB-PAGES.md](GITHUB-PAGES.md)
 
-## Automated Windows installer builds
+The repository includes a GitHub Pages workflow for publishing the static gallery from the `site/` directory.
 
-The repository includes `.github/workflows/windows-build.yml`. Pushing to `main`, or manually running the workflow from the GitHub Actions tab, starts a Windows build on a GitHub-hosted runner. The workflow prepares the frontend with the included PowerShell script, compiles the Tauri application, and uploads the generated Windows bundle files as a 14-day Actions artifact. This workflow is a build pipeline; it does not sign the installer.
+GitHub Pages hosts the gallery. It cannot independently execute Windows PowerShell commands or change a visitor's desktop wallpaper.
 
-## Publish the gallery on GitHub Pages
+Applying Windows desktop themes requires the locally installed desktop application or the appropriate local Windows integration.
 
-See [GITHUB-PAGES.md](GITHUB-PAGES.md). The repository includes a GitHub Actions workflow that automatically publishes the static gallery from `site/` whenever you push to `main`.
+## 10. Automated Windows Builds
 
-**Important:** GitHub Pages hosts the gallery only. It cannot run Windows PowerShell or change a visitor's desktop wallpaper by itself. Windows wallpaper application requires the locally installed Sir Shotto bridge or the native desktop application.
+GitHub Actions can compile the Windows application on a hosted Windows runner.
 
+The Windows workflow is located at:
 
-## Interactive theme Apply behavior
+```text
+.github/workflows/windows-build.yml
+```
 
-Interactive themes must be applied from the installed Tauri desktop application. The browser-hosted gallery can preview interactive themes, but an ordinary browser cannot create a desktop WebView behind Windows desktop icons. If a user clicks Apply in a browser, the gallery explains that the installed desktop app is required; it does not show a false success notification.
+The workflow is intended to:
 
-Inside the Tauri application, Apply shows a processing state and waits for the `apply_interactive_theme` command to return. Only then does it display a persistent success confirmation. Errors are displayed in a separate error dialog.
+1. Check out the repository.
+2. Install the Rust toolchain.
+3. Install the Tauri CLI.
+4. Prepare the frontend.
+5. Compile the Windows application.
+6. Upload generated installers as workflow artifacts.
+
+Build results are available from the repository's Actions tab.
+
+The workflow must complete successfully before an installer can be considered available.
+
+## 11. Important Implementation Status
+
+| Component | Status |
+|---|---|
+| Wallpaper slideshow | Implementation available; Windows testing required |
+| Interactive theme gallery | Included |
+| HTML theme preview | Included |
+| Windows interactive renderer | Initial implementation; runtime testing required |
+| System Tray | Included in Tauri source; runtime testing required |
+| Hide-on-close | Included in Tauri source; runtime testing required |
+| Widget overlay | Included |
+| Linux interactive renderer | Not implemented |
+| macOS interactive renderer | Not implemented |
+| Arbitrary imported HTML execution | Not enabled |
+
+Do not interpret source-code availability as proof that every desktop feature has passed runtime testing.
+
+## 12. Security
+
+Interactive themes contain HTML, CSS and JavaScript and must be treated as untrusted web content.
+
+The desktop renderer uses a sandboxed iframe for theme content.
+
+Security recommendations:
+
+- Keep theme content local.
+- Do not expose privileged Tauri APIs to untrusted theme JavaScript.
+- Do not add unrestricted filesystem or shell access to theme scripts.
+- Validate imported theme packages before enabling native execution.
+- Never publish passwords, API keys, private certificates or signing credentials.
+- Review third-party theme assets before distributing them.
+
+## 13. License
+
+License and redistribution permissions should be established before public commercial distribution.
+
+---
+
+**Sir Shotto Themes**
+
+One desktop application. Multiple desktop experiences.
