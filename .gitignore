@@ -3,3 +3,8 @@ dist/
 src-tauri/target/
 src-tauri/gen/
 .DS_Store
+*.log
+Thumbs.db
+.env
+.env.*
+!.env.example

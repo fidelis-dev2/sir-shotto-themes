@@ -37,7 +37,7 @@ Open **x64 Native Tools Command Prompt for VS** and run these commands from the 
 
 ```powershell
 cargo install tauri-cli --version "^2" --locked
-cargo tauri build --manifest-path src-tauri/Cargo.toml
+cargo tauri build
 ```
 
 The Tauri build runs `scripts/build-windows.ps1` automatically to prepare the static frontend. No Node.js installation is needed for this Windows desktop build.
@@ -98,6 +98,10 @@ Bundled interactive themes are available in this Windows-first milestone. The br
 
 Interactive themes are untrusted web content. The desktop renderer loads theme HTML inside a sandboxed iframe and the renderer page does not expose Tauri APIs to that iframe. Keep packages offline and local. Do not add filesystem, shell or privileged bridge access to theme JavaScript.
 
+
+## Automated Windows installer builds
+
+The repository includes `.github/workflows/windows-build.yml`. Pushing to `main`, or manually running the workflow from the GitHub Actions tab, starts a Windows build on a GitHub-hosted runner. The workflow prepares the frontend with the included PowerShell script, compiles the Tauri application, and uploads the generated Windows bundle files as a 14-day Actions artifact. This workflow is a build pipeline; it does not sign the installer.
 
 ## Publish the gallery on GitHub Pages
 
