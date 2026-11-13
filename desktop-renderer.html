@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; frame-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Sir Shotto Desktop Experience</title>
+<link rel="stylesheet" href="desktop-renderer.css">
+<script defer src="desktop-renderer.js"></script>
+</head>
+<body>
+  <iframe id="theme-frame" title="Sir Shotto interactive desktop theme" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe>
+  <aside id="widget-layer" class="widget-layer" aria-hidden="true">
+    <section class="widget-card">
+      <div id="widget-clock" class="widget-clock">--:--</div>
+      <div id="widget-date" class="widget-date"></div>
+      <div class="widget-brand">SIR SHOTTO THEMES</div>
+    </section>
+  </aside>
+  <div id="renderer-error" hidden>Sir Shotto could not load this desktop theme.</div>
+</body>
+</html>

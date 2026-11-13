@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#181918"><title>Sir Shotto Themes</title>
+  <link rel="icon" href="src/art/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="src/vendor/sweetalert2.min.css"><link rel="stylesheet" href="src/css/styles.css">
+  <script defer src="src/vendor/sweetalert2.min.js"></script>
+  <script defer src="src/vendor/jszip.min.js"></script>
+  <script defer src="src/js/packs.js"></script><script defer src="src/js/catalog.js"></script><script defer src="src/js/icons.js"></script>
+  <script defer src="src/js/imports.js"></script><script defer src="src/js/app.js"></script>
+</head>
+<body>
+  <header class="mast"><div class="mast-inner">
+    <button class="brand" data-page="discover" aria-label="Sir Shotto Themes home"><img src="src/art/mark.svg" alt=""><span>Sir Shotto<small>Themes</small></span></button>
+    <nav aria-label="Main navigation"><button data-page="discover" class="nav active">Discover</button><button data-page="interactive" class="nav">Interactive themes</button><button data-page="library" class="nav">Saved pictures</button></nav>
+    <div class="tools"><button class="outline compact" data-page="import"><i data-icon="import"></i><span>Import picture</span></button><button class="icon-btn settings" data-page="settings" title="Settings" aria-label="Settings"><i data-icon="settings"></i></button></div>
+  </div></header>
+  <main>
+    <section id="discover" aria-label="Discover the slideshow">
+      <div class="hero"><img id="hero-image" alt="" fetchpriority="high">
+        <div class="hero-content"><span class="feature-label"><i data-icon="spark"></i> Desktop slideshow</span>
+          <h1 id="hero-title">Sir Shotto Collection</h1><p id="hero-desc"></p>
+          <div class="actions"><button id="hero-apply" class="accent"><i data-icon="display"></i>Apply slideshow</button><button id="hero-preview" class="glass"><i data-icon="expand"></i>Preview slideshow</button></div>
+        </div>
+        <div class="hero-pager"><span id="hero-index"></span><button class="arrow" id="prev-feature" aria-label="Previous picture"><i data-icon="left"></i></button><button class="arrow" id="next-feature" aria-label="Next picture"><i data-icon="right"></i></button></div>
+      </div>
+      <div class="collection-head"><div class="heading-row"><h2>Theme groups</h2></div></div>
+      <div class="pack-grid" id="pack-grid"></div>
+      <div class="collection-head" id="pictures-heading"><div class="heading-row"><h2 id="pictures-title">Pictures in this theme</h2><span class="count" id="count"></span></div>
+        <div class="filters"><label class="search"><i data-icon="search"></i><input type="search" id="search" aria-label="Search pictures" placeholder="Search pictures"></label>
+        <label class="select"><select id="category" aria-label="Filter by style"><option value="">All styles</option></select><i data-icon="down"></i></label></div>
+      </div>
+      <div id="theme-grid" class="grid"></div>
+    </section>
+    <section id="interactive" hidden>
+      <div class="collection-head"><div class="heading-row"><h1>Interactive themes</h1><span class="count" id="interactive-count"></span></div></div>
+      <p class="section-intro">Animated desktop experiences built with HTML, CSS and JavaScript. Apply from the installed Sir Shotto Themes desktop app to keep a theme running behind your desktop icons. Browser preview alone cannot apply an interactive desktop theme.</p>
+      <div id="interactive-grid" class="grid"></div>
+      <div class="panel interactive-settings">
+        <div><h2>Desktop widgets</h2><p>Show or hide the Sir Shotto clock, date and signature overlay independently of the theme artwork.</p></div>
+        <label class="switch-row"><input type="checkbox" id="widgets-toggle" checked><span>Show desktop widgets</span></label>
+      </div>
+    </section>
+    <section id="library" hidden><div class="collection-head"><div class="heading-row"><h1>Saved pictures</h1><span class="count" id="saved-count"></span></div><button class="outline" data-page="import"><i data-icon="import"></i>Import picture</button></div><div class="grid" id="library-grid"></div></section>
+    <section id="import" class="subpage" hidden><h1>Import a picture</h1><div class="panel upload"><i data-icon="import"></i><h2>Add a picture to the slideshow</h2><p>Choose a Sir Shotto picture ZIP to add wallpapers to your slideshow collection. Native installation of third-party interactive HTML themes will be enabled after the package sandbox and import workflow are completed.</p><label class="accent file-label">Choose ZIP<input id="theme-file" type="file" accept=".zip,application/zip"></label><p id="import-message" role="status"></p></div></section>
+    <section id="settings" class="subpage" hidden><h1>Settings</h1><div class="panel"><div class="setting"><div><h3>Desktop connection</h3><p id="connection-info"></p></div><i data-icon="display"></i></div><div class="setting"><div><h3>Saved pictures</h3><p>Clear your saved list. All pictures remain in the slideshow.</p></div><button id="clear-library" class="outline">Clear list</button></div>
+      <div class="setting"><div><h3>Interactive desktop</h3><p>The desktop theme stays active when the gallery window is hidden. Use the System Tray menu to reopen Sir Shotto or quit it completely.</p></div><button id="stop-interactive" class="outline">Stop desktop theme</button></div>
+      <div class="setting"><div><h3>Widgets</h3><p>Toggle the clock, date and Sir Shotto signature overlay.</p></div><label class="switch-row"><input type="checkbox" id="settings-widgets-toggle" checked><span>Show widgets</span></label></div>
+    </div></section>
+    <noscript>Enable JavaScript to use the theme gallery.</noscript>
+  </main>
+  <footer><span>Sir Shotto <b>/</b> Themes</span><span id="mode-label">Theme gallery</span></footer>
+  <dialog id="apply-dialog" aria-labelledby="apply-title"><div class="modal-head"><h2 id="apply-title">Apply slideshow</h2><button class="icon-btn" data-close="apply-dialog" aria-label="Close"><i data-icon="close"></i></button></div>
+    <div class="chosen"><img id="chosen-image" alt=""><div><strong id="chosen-name"></strong><span id="chosen-category"></span></div></div>
+    <label class="interval-row">Change picture every <select id="interval"><option value="1">1 minute</option><option value="5" selected>5 minutes</option><option value="15">15 minutes</option><option value="30">30 minutes</option><option value="60">1 hour</option></select></label>
+    <p class="picker-prompt">Choose your operating system</p><div class="os-picker" id="os-picker"></div>
+    <div class="feedback" id="apply-message" role="status" aria-live="polite"></div><div class="setup-actions" id="setup-actions" hidden><p class="setup-hint" id="setup-hint"></p><a class="outline setup-button" id="setup-download" href="./Setup-Windows.bat" download="Setup-Windows.bat">Download Windows setup helper</a><p class="setup-note">If clicking Apply does not open Sir Shotto Themes, download this helper, open the downloaded file, and approve the Windows prompt. Then return here and try Apply again.</p></div>
+  </dialog>
+  <dialog id="preview-dialog" aria-labelledby="preview-name"><img id="preview-image" alt=""><div class="preview-shade"></div>
+    <button class="glass preview-close" data-close="preview-dialog" aria-label="Close preview"><i data-icon="close"></i></button><div class="clock"><time id="clock"></time><span id="clock-date"></span></div>
+    <div class="preview-bottom"><div><small id="preview-category"></small><h2 id="preview-name"></h2><p id="preview-description"></p></div><div class="actions"><button id="preview-prev" class="glass" aria-label="Previous picture"><i data-icon="left"></i></button><button id="preview-play" class="glass">Pause</button><button id="preview-next" class="glass" aria-label="Next picture"><i data-icon="right"></i></button><button id="preview-save" class="glass"></button><button id="preview-apply" class="accent"><i data-icon="display"></i>Apply slideshow</button></div></div>
+  </dialog>
+  <dialog id="interactive-preview-dialog" class="interactive-preview-dialog">
+    <div class="modal-head"><h2 id="interactive-preview-title">Interactive theme preview</h2><button class="icon-btn" data-close="interactive-preview-dialog" aria-label="Close"><i data-icon="close"></i></button></div>
+    <iframe id="interactive-preview-frame" title="Interactive theme preview" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer"></iframe>
+    <div class="preview-actions"><label class="switch-row"><input type="checkbox" id="preview-widgets-toggle" checked><span>Show widgets</span></label><button id="preview-apply" class="accent">Apply to desktop</button></div>
+  </dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body></html>
